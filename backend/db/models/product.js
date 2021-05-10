@@ -7,6 +7,7 @@ const ProductSchema = new mongoose.Schema({
     lowercase: true,
     minLength: 5,
     maxLength: 256,
+    unique: true,
   },
   price: {
     type: Number,
@@ -30,7 +31,6 @@ const ProductSchema = new mongoose.Schema({
   },
   totalreviews: {
     type: Number,
-    required: true,
     min: 0,
   },
   warranty: {

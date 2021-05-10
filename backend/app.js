@@ -12,7 +12,11 @@ const PORT = process.env.PORT;
 //Body Parser
 app.use(express.json());
 
+//Router
+const ProductRouter = require("./routes/productRouter");
+
 //Middleware
+app.use("/api/products", ProductRouter);
 app.use("/", (req, res) => {
   res.send("Hello World");
 });
