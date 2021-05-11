@@ -34,9 +34,8 @@ const ProductSchema = new mongoose.Schema({
     min: 0,
   },
   warranty: {
-    type: Number,
+    type: String,
     required: true,
-    min: 0,
   },
 });
 

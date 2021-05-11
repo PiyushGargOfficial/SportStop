@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const Product = require("../db/models/product");
+const { productValidation, validate } = require("../middlewares/validator");
 
-router.post("/addProduct", (req, res) => {
+router.post("/addProduct", productValidation(), validate, (req, res) => {
   const newProduct = new Product(req.body);
   newProduct
     .save()
