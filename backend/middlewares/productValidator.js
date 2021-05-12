@@ -14,7 +14,6 @@ const productValidation = () => {
       .withMessage("Name must contain a total length between 5 and 256")
       .custom((name) => {
         let result = name.match(/^([a-zA-Z0-9 _-]+)$/);
-        console.log(result);
         if (result === null) {
           throw new Error(
             "Name must not contain special characters except _ or -"

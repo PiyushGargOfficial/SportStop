@@ -4,10 +4,8 @@ const ProductSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    lowercase: true,
     minLength: 5,
     maxLength: 256,
-    unique: true,
   },
   price: {
     type: Number,
@@ -36,6 +34,11 @@ const ProductSchema = new mongoose.Schema({
   warranty: {
     type: String,
     required: true,
+  },
+  isDeleted: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
 });
 
