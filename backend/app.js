@@ -17,8 +17,11 @@ const ProductRouter = require("./routes/productRouter");
 
 //Middleware
 app.use("/api/products", ProductRouter);
-app.use("/", (req, res) => {
-  res.send("Hello World");
+
+//testing middleware
+app.use("/", (req, res, next) => {
+  console.log("Hello World");
+  next();
 });
 
 //Server
