@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const Product = require("../db/models/product");
-const { findProduct, addProduct } = require("../middlewares/productMiddleware");
+const {
+  findProduct,
+  addProduct,
+  deleteProduct,
+} = require("../middlewares/productMiddleware");
 const {
   productValidation,
   validate,
@@ -16,7 +20,9 @@ router.post("/addProduct", productValidation(), validate, (req, res) => {
           .then((product) =>
             res.status(201).json({ message: "Product Successfully Added" })
           )
-          .catch((err) => res.json({ error: "Product Registration Failed" }));
+          .catch((err) =>
+            res.status(400).json({ error: "Product Registration Failed", err })
+          );
       }
     })
     .catch((err) => {
@@ -28,21 +34,25 @@ router.post("/addProduct", productValidation(), validate, (req, res) => {
 });
 
 router.delete("/deleteProduct", (req, res) => {
-  // Product.findOne({ name: req.body.name });
+  findProduct(req.body.name)
+    .then((productExist) => {
+      if (productExist) {
+        deleteProduct(productExist.name)
+          .then((deletedProduct) => {
+            res.status(200).json({ message: `${deletedProduct.name} Deleted` });
+          })
+          .catch((err) => {
+            res.status(400).json({ error: `${productExist.name} Not Deleted` });
+          });
+      } else {
+        res.status(400).json({ error: `${req.body.name} Not Found` });
+      }
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ error: "There is some server issue. Please come back later." });
+    });
 });
-
-// const updateJobStatus = async (data) => {
-
-//   const updatedJob = await Job.update({
-//       _id: data.id
-//   }, {
-//       $set: {
-//           status: data.status
-//       }
-//   })
-
-//   return updatedJob
-
-// }
 
 module.exports = router;

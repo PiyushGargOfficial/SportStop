@@ -11,5 +11,20 @@ const addProduct = async (data) => {
   return productAdded;
 };
 
+const deleteProduct = async (data) => {
+  const deletedProduct = await Product.findOneAndUpdate(
+    {
+      name: data,
+      isDeleted: false,
+    },
+    {
+      isDeleted: true,
+    }
+  );
+
+  return deletedProduct;
+};
+
 module.exports.findProduct = findProduct;
 module.exports.addProduct = addProduct;
+module.exports.deleteProduct = deleteProduct;
