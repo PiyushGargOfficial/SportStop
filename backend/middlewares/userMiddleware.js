@@ -2,10 +2,7 @@ const { User } = require("../db/models/user");
 const { genNewUserID, updateUserID } = require("./userIdMiddleware");
 
 const findUser = async (data) => {
-  console.log("Inside Find User...", data);
-  //findOne is not working here while it is working in productMiddleware
   const userExist = await User.findOne({ email: data, isDeleted: false });
-  console.log("Inside Find User....", userExist);
   return userExist;
 };
 

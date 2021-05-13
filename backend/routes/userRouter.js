@@ -4,9 +4,9 @@ const {
   addUser,
   deleteUser,
 } = require("../middlewares/userMiddleware");
-// const { UserValidation, validate } = require("../utils/UserValidator"); UserValidation(), validate,
+const { userValidation, userValidate } = require("../utils/userValidator");
 
-router.post("/addUser", (req, res) => {
+router.post("/addUser", userValidation(), userValidate, (req, res) => {
   findUser(req.body.email)
     .then((UserExist) => {
       if (UserExist) {
@@ -23,9 +23,9 @@ router.post("/addUser", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res
-        .status(500)
-        .json({ error: "There is some server issue. Please come back later." });
+      res.status(500).json({
+        error: "There is some server issue. Please come back later.",
+      });
     });
 });
 
