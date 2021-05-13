@@ -54,6 +54,7 @@ const productValidation = () => {
       .withMessage("Warranty must contain a total length between 1 and 256"),
     //rating validation
     body("rating")
+      .if(body("rating").exists())
       .notEmpty()
       .withMessage("Rating cannot be empty")
       .bail()
@@ -64,6 +65,7 @@ const productValidation = () => {
       .withMessage("Rating must contain a value between 0 and 5"),
     //totalreviews validation
     body("totalreviews")
+      .if(body("totalreviews").exists())
       .notEmpty()
       .withMessage("Total Reviews cannot be empty")
       .bail()

@@ -4,10 +4,7 @@ const {
   addProduct,
   deleteProduct,
 } = require("../middlewares/productMiddleware");
-const {
-  productValidation,
-  validate,
-} = require("../middlewares/productValidator");
+const { productValidation, validate } = require("../utils/productValidator");
 
 router.post("/addProduct", productValidation(), validate, (req, res) => {
   findProduct(req.body.name)

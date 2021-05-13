@@ -4,6 +4,7 @@ const ProductSchema = new mongoose.Schema({
   prodID: {
     type: Number,
     min: 10000,
+    required: true,
   },
   name: {
     type: String,
