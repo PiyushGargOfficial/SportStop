@@ -1,4 +1,3 @@
-const { findOneAndUpdate } = require("../db/models/id");
 const ID = require("../db/models/id");
 
 const setID = async (data) => {

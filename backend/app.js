@@ -15,10 +15,12 @@ app.use(express.json());
 //Router
 const ProductRouter = require("./routes/productRouter");
 const IDRouter = require("./routes/idRouter");
+const UserRouter = require("./routes/userRouter");
 
 //Controllers
 app.use("/api/products", ProductRouter);
 app.use("/api/id/", IDRouter);
+app.use("/api/users/", UserRouter);
 
 //testing middleware
 app.use("/", (req, res, next) => {
