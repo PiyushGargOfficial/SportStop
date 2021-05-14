@@ -18,6 +18,8 @@ const addUser = async (data) => {
     gender: data.gender,
     email: data.email,
     userID: newId,
+    password: data.password,
+    cpassword: data.cpassword,
   };
 
   const newUser = new User(newUserData);

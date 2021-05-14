@@ -8,6 +8,39 @@ const userValidation = () => {
       .bail()
       .isEmail()
       .withMessage("Enter a valid Email"),
+    body("password")
+      .notEmpty()
+      .withMessage("Password cannot be empty")
+      .bail()
+      .isString()
+      .withMessage("Password invalid")
+      .bail()
+      .isLength({ min: 5, max: 256 })
+      .withMessage("Password must be between 5 and 256 characters")
+      .bail()
+      .custom((password) => {
+        let result = password.match(/^([a-zA-Z0-9 ]+)$/);
+        if (!(result === null)) {
+          throw new Error("Password must contain special characters");
+        } else {
+          return true;
+        }
+      }),
+    body("cpassword")
+      .notEmpty()
+      .withMessage("Confirm Password cannot be empty")
+      .bail()
+      .isString()
+      .withMessage("Confirm Password invalid")
+      .bail()
+      .custom((cpassword, { req }) => {
+        console.log(req.body);
+        if (req.body.password !== cpassword) {
+          throw new Error("Confirm Password and Password do not match");
+        } else {
+          return true;
+        }
+      }),
     body("firstName")
       .notEmpty()
       .withMessage("Firstname cannot be empty")

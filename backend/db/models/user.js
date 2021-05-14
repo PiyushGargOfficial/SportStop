@@ -10,6 +10,18 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+    min: 5,
+    max: 256,
+  },
+  cpassword: {
+    type: String,
+    required: true,
+    min: 5,
+    max: 256,
+  },
   firstName: {
     type: String,
     required: true,
